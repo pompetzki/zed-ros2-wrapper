@@ -2833,6 +2833,10 @@ bool ZedCamera::startCamera()
   } else {
     mInitParams.maximum_working_resolution = mPcResol;
   }
+
+  // Set the open timeout (in seconds) for the camera connection, stream opening, or SVO loading
+  mInitParams.open_timeout_sec = mCamTimeoutSec; 
+
   // <---- ZED configuration
 
   // ----> Try to connect to a camera, to a stream, or to load an SVO
@@ -2916,8 +2920,6 @@ bool ZedCamera::startCamera()
     }
 
     mDiagUpdater.force_update();
-
-    rclcpp::sleep_for(std::chrono::seconds(mCamTimeoutSec));
   }
   // ----> Try to connect to a camera, to a stream, or to load an SVO
 
